@@ -1,5 +1,3 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     // add six to a number
     public static int addSix(int a){
@@ -7,14 +5,38 @@ public class Main {
     }
 
     static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
+        int[] sizes = {1000, 100000, 10000000, 50000000};
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + Main.addSix(i));
+        for (int size : sizes) {
+            BinarySearchTree<Spot> tree = new BinarySearchTree<>();
+
+            // Fill the tree with random spots
+            for (int i = 0; i < size; i++) {
+                tree.insert(Spot.randomSpot());
+            }
+
+            // Create the new spot before starting the timer
+            Spot newSpot = Spot.randomSpot();
+
+            long startTime = System.nanoTime();
+
+            tree.insert(newSpot);
+
+            long endTime = System.nanoTime();
+
+            long elapsedTime = endTime - startTime;
+
+            System.out.println("Tree size: " + size + ", insertion time: " + elapsedTime + " nanoseconds");
         }
+
+
+    }
+
+    public static Spot greatestLowerBound(
+            BinarySearchTree<Spot> tree, double longitude) {
+
+        Spot target = new Spot("", 0, longitude);
+
+        return tree.greatestLowerBound(target);
     }
 }
